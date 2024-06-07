@@ -13,8 +13,8 @@ import {
   SafeAreaView,
   Text,
 } from 'react-native';
-import { Alert } from './components/alert';
-import { Section } from './components/section';
+import { Alert } from './components/Alert';
+import { Section } from './components/Section';
 
 type app_data = { id: string, description: string, url: string }
 
