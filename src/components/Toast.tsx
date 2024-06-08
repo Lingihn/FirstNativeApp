@@ -16,7 +16,7 @@ export const Toast: React.FC<ToastProps> = ({ message, messageType, isVisible, s
       marginBottom: 10,
     },
     message: {
-      color: 'white',
+      color: '#31312F',
       fontSize: 18,
       padding: 5,
       marginBottom: 10
@@ -28,16 +28,22 @@ export const Toast: React.FC<ToastProps> = ({ message, messageType, isVisible, s
       paddingRight: 10,
       paddingTop:10,
       paddingBottom: 10,
-      borderRadius: 10,
-      backgroundColor: '#31312F'
+      borderRadius: 5,
+      borderColor: '#C5C5B9',
+      borderWidth: 1,
+      backgroundColor: '#A09F8D',
     },
     button: {
-      borderRadius: 8,
+      borderRadius: 5,
       backgroundColor: '#E2E3DD',
-      padding: 5
+      paddingLeft: 50,
+      paddingRight:50,
+      paddingTop: 10,
+      paddingBottom: 10
     },
     button_text: {
-      fontSize: 16
+      fontSize: 18,
+      color: '#31312F'
     }
   })
 

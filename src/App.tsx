@@ -17,7 +17,7 @@ import {
 import { Toast } from './components/Toast';
 import { Section } from './components/Section';
 
-type app_data = { id: string, description: string, url: string }
+type app_data = { id: string, alt: string, url: string, camera_model: string, camera_exposure_time: string, camera_aperture: string, camera_focal_length: string, camera_iso:string }
 type toast_message_type = 'success' | 'warning' | 'error' | 'info'
 type toastMessage = {message: string, toastType: toast_message_type}
 
@@ -37,8 +37,13 @@ function App(): React.JSX.Element {
   const prepareData = (data: any[]) => {
     return data.map((item) => ({
       id: item.id,
-      description: item.description,
-      url: item.urls.small
+      alt: item.description,
+      url: item.urls.small,
+      camera_model: item.exif.make && item.exif.model ? `${item.exif.make} ${item.exif.model}` : null ,
+      camera_exposure_time: item.exif.exposure_time ,
+      camera_aperture: item.exif.aperture,
+      camera_focal_length: item.exif.focal_length,
+      camera_iso: item.exif.iso
     })
   )}
   const displayToast = (message: string, message_type: toast_message_type) =>{
@@ -68,6 +73,7 @@ function App(): React.JSX.Element {
       backgroundColor: '#E2E3DD'
     },
     h1Title: {
+      color: '#31312F',
       fontSize: 36,
       textAlign: 'center'
     }
@@ -84,8 +90,13 @@ function App(): React.JSX.Element {
         data={app_data}
         renderItem={ ({ item } ) => 
           <Section
-            description={item.description}
+            alt={item.alt}
             pic_url={item.url}
+            camera_model={item.camera_model}
+            camera_exposure_time={item.camera_exposure_time}
+            camera_aperture={item.camera_aperture}
+            camera_focal_length={item.camera_focal_length}
+            camera_iso={item.camera_iso}
           />
         }
         keyExtractor={item => item.id}
