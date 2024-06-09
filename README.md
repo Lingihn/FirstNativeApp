@@ -13,7 +13,7 @@
 Node.JS 22.2 (Минимальная версия: 18)  
 Type Script 5.0.4  
 
-React Native 0.74.2  (Без Expo Framework)
+React Native 0.74.2  (Без Expo Framework)  
 React-Navigation 6.1.17  
 Mobx 6.12.3  
 Axios 1.7.2  
