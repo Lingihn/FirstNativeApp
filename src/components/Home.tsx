@@ -1,15 +1,20 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { FlatList, StyleSheet, Text, View } from "react-native"
-import { API_URL, API_ACCESS_KEY } from "../App"
+import { API_URL, API_ACCESS_KEY, RootStackParamList } from "../App"
 import { ItemImage } from "./ItemImage"
 import { Toast } from "./Toast"
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 
 type app_data = { id: string, alt: string, url: string, camera_model: string, camera_exposure_time: string, camera_aperture: string, camera_focal_length: string, camera_iso: string }
 type toast_message_type = 'success' | 'warning' | 'error' | 'info'
 type toastMessage = { message: string, toastType: toast_message_type }
 
-export const Home: React.FC = () => {
+type homeProps = NativeStackScreenProps<RootStackParamList, 'Home'>
+
+
+export const Home: React.FC<homeProps> = ({navigation, route}) => {
 
 useEffect(() => {
     fetchPics()
@@ -80,6 +85,7 @@ useEffect(() => {
     }
   })
 
+
   return <View
   style={styles.appContainer}
 >
@@ -87,17 +93,14 @@ useEffect(() => {
     data={app_data}
     onEndReached={fetchPics}
     numColumns={2}
-    renderItem={({ item }) =>
-      <ItemImage
+    renderItem={({ item }) =>{
+     return <ItemImage
+        id={item.id}
         alt={item.alt}
         pic_url={item.url}
-      // camera_model={item.camera_model}
-      // camera_exposure_time={item.camera_exposure_time}
-      // camera_aperture={item.camera_aperture}
-      // camera_focal_length={item.camera_focal_length}
-      // camera_iso={item.camera_iso}
+        navigation={navigation}
       />
-    }
+    }}
     keyExtractor={item => item.id}
   />
   <Toast

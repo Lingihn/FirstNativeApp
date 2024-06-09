@@ -26,11 +26,15 @@ import { Home } from './components/Home';
 
 export const API_URL = 'https://api.unsplash.com'
 export const API_ACCESS_KEY = 'AhXstOVlPrzPfO1sC_76IyZkrXImj90zTXwKiTeN8ws'
+export type RootStackParamList ={
+  Home: undefined,
+  Card: { id: string }
+}
 
 function App(): React.JSX.Element {
+  
 
-
-  const Stack = createNativeStackNavigator()
+  const Stack = createNativeStackNavigator<RootStackParamList>()
 
   return (
     <NavigationContainer>
@@ -38,12 +42,11 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name='Home'
           component={Home}
-          options={{title: 'Random pics from Unsplash'}}
+          options={{title: 'Home'}}
         />
-        {/* <Stack.Screen name='Card'>
+        <Stack.Screen name='Card'>
           {(props) => <Card {...props} />}
-
-        </Stack.Screen> */}
+        </Stack.Screen>
       </Stack.Navigator>
 
     </NavigationContainer>
