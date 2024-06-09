@@ -33,6 +33,7 @@ export class CardStore extends MainStore {
         if (e instanceof Error) {
           if(e.message.includes('403')) this.setToastMessage('Ошибка при обращении к Unsplash. \nПроверьте валидность ключа', 'error')
           if(e.message.includes('401')) this.setToastMessage('Ошибка при обращении к Unsplash. \nПроверьте валидность ключа', 'error')
+          this.setToastMessage('Нет доступа к сервису Unsplash. \nПроверьте интернет или VPN', 'error')
         }      
     }
   }
