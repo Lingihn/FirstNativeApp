@@ -9,53 +9,57 @@ import { observer } from "mobx-react-lite"
 type homeProps = NativeStackScreenProps<RootStackParamList, 'Home'>
 
 
-export const Home: React.FC<homeProps> = observer(({ navigation, route }) => {
-    const {mainData, fetchData, refreshData, toastMessage, setToastMessage, toastVisible, setToastVisible} = useMainStore()
-    useEffect(() => {
-        fetchData()
-    }, [])
+export const Home: React.FC<homeProps> = observer(({ navigation }) => {
 
-    const [refreshing, setRefreshing] = useState(false)
-    const styles = StyleSheet.create({
-        appContainer: {
-            flex: 1,
-            paddingTop: 15,
-            backgroundColor: '#E2E3DD'
-        }
-    })
-    const onRefresh = () => {
-        setRefreshing(true)
-        refreshData()
-        setTimeout(() => {
-            setRefreshing(false)
-        }, 1000)
+  const { mainData, fetchData, refreshData, toastMessage, toastVisible, setToastVisible } = useMainStore()
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = () => {
+    setRefreshing(true)
+    refreshData()
+    setTimeout(() => {
+      setRefreshing(false)
+    }, 1000)
+  }
+
+  const styles = StyleSheet.create({
+    appContainer: {
+      flex: 1,
+      paddingTop: 15,
+      backgroundColor: '#E2E3DD'
     }
+  })
 
-    return <View
-        style={styles.appContainer}
-    >
-        <FlatList
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            data={mainData}
-            onEndReached={fetchData}
-            onEndReachedThreshold={0.5}
-            numColumns={2}
-            renderItem={({ item }) => {
-                return <ItemImage
-                    id={item.id}
-                    alt={item.alt}
-                    pic_url={item.url}
-                    navigation={navigation}
-                />
-            }}
-            keyExtractor={item => item.id}
-        />
-        <Toast
-            message={toastMessage.message}
-            messageType={toastMessage.toastType}
-            isVisible={toastVisible}
-            setVisible={setToastVisible}
-        />
+  return (
+    <View style={styles.appContainer}>
+      <FlatList
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        data={mainData}
+        onEndReached={fetchData}
+        onEndReachedThreshold={0.5}
+        numColumns={2}
+        renderItem={({ item }) => {
+          return <ItemImage
+            id={item.id}
+            alt={item.alt}
+            pic_url={item.url}
+            navigation={navigation}
+          />
+        }}
+        keyExtractor={item => item.id}
+      />
+      <Toast
+        message={toastMessage.message}
+        messageType={toastMessage.toastType}
+        isVisible={toastVisible}
+        setVisible={setToastVisible}
+      />
     </View>
+  )
 })

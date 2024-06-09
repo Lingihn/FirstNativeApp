@@ -8,7 +8,7 @@ import { observer } from "mobx-react-lite";
 type CardData = { id: string, alt: string, url: string, camera_model: string, camera_exposure_time: string, camera_aperture: string, camera_focal_length: string, camera_iso: string }
 type CardProps = NativeStackScreenProps<RootStackParamList, 'Card'>
 export const Card: React.FC<CardProps> = observer(({ navigation, route }) => {
-  const {data, fetchDataByID, exifDataisEmpty} = useCardStore()
+  const {data, fetchDataById: fetchDataByID, exifDataisEmpty} = useCardStore()
 
   useEffect(() => {
     fetchDataByID(route.params.id)

@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import { Button, Modal, Pressable, StyleSheet, Text, View } from "react-native"
+import { Modal, Pressable, StyleSheet, Text, View } from "react-native"
 
 type ToastProps = {
   message: string,
