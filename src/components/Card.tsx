@@ -6,15 +6,15 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 type CardData = { id: string, alt: string, url: string, camera_model: string, camera_exposure_time: string, camera_aperture: string, camera_focal_length: string, camera_iso: string }
 type CardProps = NativeStackScreenProps<RootStackParamList, 'Card'>
 export const Card: React.FC<CardProps> = ({ navigation, route }) => {
-  useEffect(() => {    
+  useEffect(() => {
     fetchPicById(route.params.id)
   }, [])
   const styles = StyleSheet.create({
     card: {
       backgroundColor: '#E5E1D8',
-      padding: 5,
+      // padding: 5,
       width: 350,
-      height: 360,
+      height: 355,
       borderRadius: 5,
       borderWidth: 1,
       borderColor: '#C5C5B9',
@@ -22,15 +22,28 @@ export const Card: React.FC<CardProps> = ({ navigation, route }) => {
       alignItems: 'baseline'
     },
     image: {
-      width: 340,
+      width: 350,
       height: 340,
       marginBottom: 5,
       marginTop: 5,
+      padding: 5
     },
-    text_cardInfo: {
+    text_cardElem: {
       color: '#31312F',
-      paddingLeft: 10,
-      paddingBottom: 3
+      paddingLeft: 5,
+      paddingBottom: 5
+    },
+    text_cardHead: {
+      fontSize: 14,
+    },
+    text_card: {
+      padding: 5,
+      marginTop: 15,
+      width: 350,
+      borderRadius: 5,
+      borderWidth: 1,
+      borderColor: '#C5C5B9',
+      backgroundColor: '#E5E1D8',
     }
   })
   const fetchPicById = async (id: string) => {
@@ -40,10 +53,6 @@ export const Card: React.FC<CardProps> = ({ navigation, route }) => {
           client_id: API_ACCESS_KEY
         }
       })
-        .then(response => {
-          console.log('response', response);
-          return response
-        })
         .then(response => prepareData(response.data as any[]))
         .then(response => setCardData(response as unknown as CardData))
     } catch (e) {
@@ -52,7 +61,7 @@ export const Card: React.FC<CardProps> = ({ navigation, route }) => {
       }
     }
   }
-  const emptyCard = { id: '', alt: '', url: '', camera_model: '', camera_aperture: '', camera_exposure_time: '', camera_focal_length: '', camera_iso: '' }
+  const emptyCard = { id: '', alt: '', url: '/assets/imagePlaceholder.jpg', camera_model: '', camera_aperture: '', camera_exposure_time: '', camera_focal_length: '', camera_iso: '' }
   const [cardData, setCardData] = useState<CardData>(emptyCard)
   const prepareData = (data: any) => {
     return {
@@ -66,8 +75,9 @@ export const Card: React.FC<CardProps> = ({ navigation, route }) => {
       camera_iso: data.exif.iso
     }
   }
-  
-
+  const exifDataisEmpty = (data: CardData) => {
+    return data.camera_model || data.camera_iso || data.camera_aperture || data.camera_exposure_time || data.camera_focal_length
+  }
 
   return (
     <View style={styles.card}>
@@ -76,12 +86,13 @@ export const Card: React.FC<CardProps> = ({ navigation, route }) => {
         style={styles.image}
         alt={cardData.alt}
       />
-      <View>
-        {cardData.camera_model && <Text style={styles.text_cardInfo}>Camera model: {cardData.camera_model}</Text>}
-        {cardData.camera_exposure_time && <Text style={styles.text_cardInfo}>Exposure time: {cardData.camera_exposure_time}</Text>}
-        {cardData.camera_aperture && <Text style={styles.text_cardInfo}>Aperture: {cardData.camera_aperture}</Text>}
-        {cardData.camera_focal_length && <Text style={styles.text_cardInfo}>Focal length: {cardData.camera_focal_length}</Text>}
-        {cardData.camera_iso && <Text style={styles.text_cardInfo}>ISO: {cardData.camera_iso}</Text>}
+      <View style={styles.text_card}>
+        <Text style={[styles.text_cardElem, styles.text_cardHead]}>Exif data: {exifDataisEmpty(cardData) ? '' : 'is empty'}</Text>
+        {cardData.camera_model && <Text style={styles.text_cardElem}>Camera model: {cardData.camera_model}</Text>}
+        {cardData.camera_exposure_time && <Text style={styles.text_cardElem}>Exposure time: {cardData.camera_exposure_time}</Text>}
+        {cardData.camera_aperture && <Text style={styles.text_cardElem}>Aperture: {cardData.camera_aperture}</Text>}
+        {cardData.camera_focal_length && <Text style={styles.text_cardElem}>Focal length: {cardData.camera_focal_length}</Text>}
+        {cardData.camera_iso && <Text style={styles.text_cardElem}>ISO: {cardData.camera_iso}</Text>}
       </View>
 
     </View>
