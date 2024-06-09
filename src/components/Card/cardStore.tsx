@@ -30,7 +30,6 @@ export class CardStore extends MainStore {
           this.data = this.prepareCardData(response.data as any)
         }))
     } catch (e) {
-        console.log('error');
         if (e instanceof Error) {
           if(e.message.includes('403')) this.setToastMessage('Ошибка при обращении к Unsplash. \nПроверьте валидность ключа', 'error')
           if(e.message.includes('401')) this.setToastMessage('Ошибка при обращении к Unsplash. \nПроверьте валидность ключа', 'error')
