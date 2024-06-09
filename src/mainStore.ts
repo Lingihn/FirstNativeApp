@@ -55,8 +55,8 @@ export class MainStore {
         }))
     } catch (e) {
       if (e instanceof Error) {
-        console.log('error');
-        this.setToastMessage('Ошибка получения данных из Unsplash', 'error')
+        if(e.message.includes('403')) this.setToastMessage('Ошибка при обращении к Unsplash. \nПроверьте валидность ключа', 'error')
+        if(e.message.includes('401')) this.setToastMessage('Ошибка при обращении к Unsplash. \nПроверьте валидность ключа', 'error')
       }
     }
   }

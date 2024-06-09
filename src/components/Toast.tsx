@@ -19,6 +19,7 @@ export const Toast: React.FC<ToastProps> = observer( ({ message, messageType, is
     message: {
       color: '#31312F',
       fontSize: 18,
+      textAlign:'center',
       padding: 5,
       marginBottom: 10
     },

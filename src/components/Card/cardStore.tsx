@@ -2,18 +2,20 @@ import axios from "axios";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { API_URL, API_ACCESS_KEY } from "../../App";
 import React from "react";
+import { MainStore } from "../../mainStore";
 type CardData = { id: string, alt: string, url: string, camera_model: string, camera_exposure_time: string, camera_aperture: string, camera_focal_length: string, camera_iso: string }
 
 
-export class CardStore {
+export class CardStore extends MainStore {
   constructor() {
+    super()
     makeObservable(this, {
       data: observable,
       fetchDataById: action,
       exifDataisEmpty: computed
     })
   }
-  emptyCard = { id: '', alt: '', url: '/assets/imagePlaceholder.jpg', camera_model: '', camera_aperture: '', camera_exposure_time: '', camera_focal_length: '', camera_iso: '' }
+  emptyCard = { id: '', alt: '', url: '../../assets/imagePlaceholder.jpg', camera_model: '', camera_aperture: '', camera_exposure_time: '', camera_focal_length: '', camera_iso: '' }
 
   data: CardData = this.emptyCard
 
@@ -25,18 +27,18 @@ export class CardStore {
         }
       })
         .then(response => runInAction(() => {
-          this.data = this.prepareData(response.data as any)
+          this.data = this.prepareCardData(response.data as any)
         }))
     } catch (e) {
-      if (e instanceof Error) {
         console.log('error');
-
-        // displayToast('Ошибка получения данных из Unsplash', 'error')
-      }
+        if (e instanceof Error) {
+          if(e.message.includes('403')) this.setToastMessage('Ошибка при обращении к Unsplash. \nПроверьте валидность ключа', 'error')
+          if(e.message.includes('401')) this.setToastMessage('Ошибка при обращении к Unsplash. \nПроверьте валидность ключа', 'error')
+        }      
     }
   }
 
-  prepareData = (data: any) => {
+  prepareCardData = (data: any) => {
     return {
       id: data.id,
       alt: data.description,
