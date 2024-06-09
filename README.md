@@ -1,79 +1,46 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Приложение:
+Тестовое приложение "Галерея изобрежений".  
+Выполнено в качестве тестового задания для оценки командой "Кавер".  
+В качестве API использован сервис [Unsplash]([https://unsplash.com/]).  
+# Функционал в приложении:
+- Бесконечная лента случайных изображений.
+- Обновление списка с помощью свайпа вверх.
+- Переход в карточку с информацией о фото.
 
-# Getting Started
+# Используемый стек:
+Node.JS 22.2 (Минимальная версия: 18)  
+Type Script 5.0.4  
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+React Native 0.74.2  (Без Expo Framework)
+React-Navigation 6.1.17  
+Mobx 6.12.3  
+Axios 1.7.2  
 
-## Step 1: Start the Metro Server
+# Структура проекта:
+src - Исходный код проекта.
+- assets - Картинки для проекта (Плэйсхолдер)
+- components - Папка с React компонентами приложения
+- app.tsx - Корневой компонент проекта.
+- mainStore.tsx - Главный стор проекта.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+# Локальный запуск:
+Настроить локальный ПК для запуска:
+1. https://reactnative.dev/docs/set-up-your-environment (Выбрать используемую платформу и настроить окружение)
+2. Скачать проект. Открыть консоль, перейти в папку с проектом
+3. `npm start`
+4. `i`
+5. Дождаться загрузки симулятора и сборки приложения
 
-To start Metro, run the following command from the _root_ of your React Native project:
+# Проблемы:  
+#### Q: Приложение самопроизвольно отказывается загружать картинки. Интернет работает.
+##### A: Произошло ограничение по количеству запросов (50 в час). Подождите, либо - установите свой ключ.  
+#### Q: Не удается установить cocoaPods по инструкции с проекта.
+##### A: Помог следующий гайд по установке cocoaPods.
+`https://stackoverflow.com/a/25257238` 
+#### Q: Использование своего API ключа.
+##### A: Ключ хранится в константе, в корневом компоненте:
+`/App.tsx (API_ACCESS_KEY)`
 
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+#### Q: Как запустить проект без Expo на устройстве?
+##### A: Инструкция с проекта React Native.
+`https://reactnative.dev/docs/running-on-device`
