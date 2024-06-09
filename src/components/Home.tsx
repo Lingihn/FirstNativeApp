@@ -24,6 +24,7 @@ useEffect(() => {
   const [app_data, setAppData] = useState<app_data[]>([])
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [toastMessage, setToastMessage] = useState<toastMessage>({ message: '', toastType: 'info' })
+  const [refreshing, setRefreshing] = useState(false)
 
   const prepareData = (data: any[]) => {
     return data.map((item) => {
@@ -84,14 +85,25 @@ useEffect(() => {
       backgroundColor: '#E2E3DD'
     }
   })
+  const onRefresh = () => {
+    setRefreshing(true)
+    refreshPics()
+    setTimeout(() => {
+        setRefreshing(false)
+    }, 1000)
+  }
 
 
   return <View
   style={styles.appContainer}
+  onResponderRelease={(evt) => {}}
 >
   <FlatList
+    refreshing={refreshing}
+    onRefresh={onRefresh}
     data={app_data}
     onEndReached={fetchPics}
+    onEndReachedThreshold={0.5}
     numColumns={2}
     renderItem={({ item }) =>{
      return <ItemImage

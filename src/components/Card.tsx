@@ -12,7 +12,6 @@ export const Card: React.FC<CardProps> = ({ navigation, route }) => {
   const styles = StyleSheet.create({
     card: {
       backgroundColor: '#E5E1D8',
-      // padding: 5,
       width: 350,
       height: 355,
       borderRadius: 5,
@@ -34,7 +33,7 @@ export const Card: React.FC<CardProps> = ({ navigation, route }) => {
       paddingBottom: 5
     },
     text_cardHead: {
-      fontSize: 14,
+      fontSize: 16,
     },
     text_card: {
       padding: 5,
