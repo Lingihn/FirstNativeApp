@@ -17,7 +17,7 @@ import {
   View,
 } from 'react-native';
 import { Toast } from './components/Toast';
-import { Card } from './components/Card';
+import { Card } from './components/Card/Card';
 import { ItemImage } from './components/ItemImage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

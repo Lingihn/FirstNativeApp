@@ -1,13 +1,14 @@
+import { observer } from "mobx-react-lite"
 import { Button, Modal, Pressable, StyleSheet, Text, View } from "react-native"
 
 type ToastProps = {
   message: string,
   messageType: 'success' | 'warning' | 'error' | 'info'
   isVisible: boolean,
-  setVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setVisible: (visible:boolean) => void
 }
 
-export const Toast: React.FC<ToastProps> = ({ message, messageType, isVisible, setVisible }) => {
+export const Toast: React.FC<ToastProps> = observer( ({ message, messageType, isVisible, setVisible }) => {
   const styles = StyleSheet.create({
     centered: {
       flex: 1,
@@ -72,4 +73,4 @@ export const Toast: React.FC<ToastProps> = ({ message, messageType, isVisible, s
       </Modal>
     </View>
   )
-}
+})
